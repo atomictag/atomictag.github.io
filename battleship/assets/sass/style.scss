@@ -1,0 +1,30 @@
+
+// Bourbon utilities
+@import "bourbon";
+
+@import "scrollable";
+
+html {
+    height: 100%;
+}
+
+body {
+    @include size(100% 100%);
+    margin: 0px;
+    padding: 0px;
+    background: #ccc;
+    font-family: $helvetica;
+    overflow: hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+}
+
+.page-container {
+    margin:0px;
+
+    canvas, .kineticjs-content {
+        //@include size(100% 100%);
+        background: #ddd;
+    }
+}
+

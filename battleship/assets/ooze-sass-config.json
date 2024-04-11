@@ -1,0 +1,6 @@
+{
+    "sass" : "sass",
+    "css"  : "css",
+    "sources" : [ "style.scss" ],
+    "includes" : [ "../../bootstrap-2.3.1/src", "../../bourbon-3.1.5" ]
+}

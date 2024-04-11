@@ -1,0 +1,20 @@
+
+/**
+ * Scrollable - All scrollable elements must have the scrollable class,
+ * not only to correctly function CSS wise, but also to make scrollstop work
+ * Use the synthetic 'scrollable-vertical-only' and 'scrollable-horizontal-only'
+ * to restrict the scrolling of a 'scrollable' element
+ */
+.scrollable {
+  @include position(absolute, 0px 0px 0px 0px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Force hardware-acceleration in Webkits to prevent text flickering */
+.scrollable > * {
+  @include position(relative);
+  @include transform(translate3d(0, 0, 0));
+  -webkit-backface-visibility: hidden;
+}

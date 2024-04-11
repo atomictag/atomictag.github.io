@@ -1,0 +1,14 @@
+/*
+ * ===== BOOTSTRAP VARIABLE OVERRIDES ======
+ */
+
+// Use glyphicons? (set to false if, e.g., you are using Font Awesome)
+// http://fortawesome.github.com/Font-Awesome
+$use-glyphicons: false;
+
+// Override icon paths to the correct glyphicons locations
+$iconSpritePath:          "../../../bootstrap-2.3.1/img/glyphicons-halflings.png";
+$iconWhiteSpritePath:     "../../../bootstrap-2.3.1/img/glyphicons-halflings-white.png";
+
+// Import bootstrap
+@import "bootstrap";
