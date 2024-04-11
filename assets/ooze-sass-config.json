@@ -1,0 +1,14 @@
+{
+    "sass" : "sass",
+    "css"  : "css",
+    "sources" : [ "style.scss" ],
+    "includes" : [
+        "fonts/font-awesome-4.3.0/scss",
+        "fonts/fontello/scss",
+        "../shared/sass/vendor/bourbon-4.0.1",
+        "../shared/sass/vendor/catalyst-0.4.1/src",
+        "../shared/sass/vendor/pure-0.5.0",
+        "../shared/sass/mooze"
+    ],
+    "combine-mq" : true
+}
