@@ -1,0 +1,18 @@
+
+// Sidebar is a holder of static and absolute items, so it has to be relatively positioned
+.sidebar-list--ap {
+    @include position(relative);
+}
+
+// Bottom items need to be absolutely positioned during transitions
+.sidebar-list--ap .sidebar-list__bottomitems {
+    @include position(absolute);
+}
+
+// Login container starts with a zero scaleY. Its height is set in javascript so it's not added here.
+// Set its transform-origin to top so it will grow downward when its scaleX is increased.
+.sidebar-list--ap .sidebar-list__logincontainer {
+    @include transform-origin(top);
+    @include transform(scale(1, 0));
+    display: inherit;
+}

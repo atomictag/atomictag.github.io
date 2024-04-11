@@ -1,0 +1,92 @@
+$responsive-content-max-width: 1024px;
+$responsive-content-max-width-map: ( 'l' 1024px, 'm' 800px, 's' 480px);
+
+body {
+    background-color: $content-background-color; // Needed for rubberbanding on iOS
+}
+
+.mooze-screen {
+    background-color:inherit; // Needed for rubberbanding on iOS
+}
+
+.mooze-view__header, .mooze-view__footer { // This is the container of the header. The header itself is .mooze-header
+    background-color: $content-header-background-color;
+}
+
+.mooze-header, .mooze-footer, .mooze-header--content { // Adjust max-width of the 'page' content here
+    //max-width: $responsive-content-max-width;
+    @include device-dependent('max-width', $responsive-content-max-width-map);
+}
+
+.mooze-header__dropdown-nav {
+    background-color: lighten(#e5e8e8, 8);
+    line-height: 2em;
+
+    [data-action].isSelected {
+        background-color: darken(#e5e8e8, 10);
+    }
+    [data-action].isActive, [data-action].isCurrent  {
+        background-color: darken(#e8e8e5, 20);
+    }
+}
+
+&.form-factor-desktop .mooze-header__dropdown-nav
+[data-action]:not(.isActive):not(.isCurrent):hover {
+    background-color: darken(#e5e8e8, 10);
+};
+
+.mooze-window__layer--content {
+    background-color: $content-background-color;
+    overflow: visible;
+}
+
+.mooze-view--content {
+    //max-width: $responsive-content-max-width;
+    @include device-dependent('max-width', $responsive-content-max-width-map);
+}
+
+.mooze-header__rightitems {
+    max-width: 50%;
+}
+
+// Make the dialog window position absolute on ios - as "fixed" becomes jumpy with input screens
+&.ios .mooze-window--dialogs {
+    @include position(absolute, 0px 0px 0px 0px); // Was fixed but that bounces on ios! TODO: test on Android
+}
+
+// Prevent hiding of URL bar when scrolling on Android
+&.android .mooze-screen {
+  overflow-y: auto;
+  @include device-dependent('max-height', ( 's' (100vh 100vw)));
+}
+
+// Experimental RESPONSIVE header with opacity on ios - content slides under it with a nice effect
+&.ios {
+    .mooze-view__header {
+        opacity: .8;
+    }
+
+    .mooze-window--main {
+        @include device-dependent('top', $mooze-responsive-header-height-map, 0, -1);
+        @include device-dependent('margin-top', $mooze-responsive-header-height-map);
+    }
+}
+
+// Overlay fixed, translated below the header
+.mooze-window--overlay {
+    @include position(fixed, 0px 0px 0px 0px);
+    @include device-dependent('margin-top', $mooze-responsive-header-height-map);
+}
+
+// The content of the overlay layer
+.mooze-overlay {
+
+    // Overlay body centered on page
+    .mooze-overlay__body {
+        @include position(absolute, 0px 0 0 50%);
+        @include transform(translateX(-50%));
+        @include device-dependent('min-width', $responsive-content-max-width-map);
+        margin: auto;
+    }
+
+}

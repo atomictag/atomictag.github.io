@@ -1,0 +1,4 @@
+// Overlay translated below the header
+.mooze-window--overlay {
+    @include device-dependent('margin-top', $mooze-embedded-header-height-map);
+}

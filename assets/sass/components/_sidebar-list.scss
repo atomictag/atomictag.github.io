@@ -1,0 +1,205 @@
+
+// Extent
+$sidebar-width-extent: 256px !default; // 1024 - 768 = 320 * 0.8 = 256
+
+// Sizes
+$sidebar-list-item-height-map: (
+    's' 40px,
+    'm' 55px,
+)!default;
+
+// Fonts
+$sidebar-list-item-font-size--label-map:  (
+    's' .8em
+)!default;
+$sidebar-list-item-font-size--icon-map:  (
+    's' 1em,
+    'm' 1.1em
+)!default;
+$sidebar-list-item-font-color: #fff !default;
+$sidebar-list-item-font-color--selected: $sidebar-list-item-font-color !default;
+$sidebar-list-item-font-color--active: $sidebar-list-item-font-color !default;
+//$sidebar-list-item-font-color--disabled: #666 !default;
+
+// Backgrounds
+$sidebar-list-item-background-color: rgba(180,180,180,1) !default;
+$sidebar-list-item-background-color--selected: rgba(orange,0.5) !default;
+$sidebar-list-item-background-color--active: rgba(120,120,200,0.5) !default;
+//$sidebar-list-item-background-color--disabled: rgba(200,200,200,1) !default;
+
+/* ==== LIST COMPONENT ==== */
+
+.sidebar-list {
+    @include size(100% auto);
+    background: transparent;
+}
+
+/* ==== LIST ELEMENTS ==== */
+
+.sidebar-list__item {
+    @include device-dependent('height', $sidebar-list-item-height-map);
+    @include box-sizing(border-box);
+    background-color: $sidebar-list-item-background-color;
+
+    color: $sidebar-list-item-font-color;
+}
+
+.sidebar-list__item:last-of-type {
+
+}
+
+// Container for private items
+.sidebar-list__privateitems {
+    @include size(100% 0px);
+    @include transform-origin(top);
+    @include transform(scale(1,0));
+}
+
+// Container for bottom items. This becomes absolutely positioned in "ap" mode (see _sidebar-list-ap.scss)
+.sidebar-list__bottomitems {
+    width: 100%;
+}
+
+// The login container where the login/activation views are attached
+.sidebar-list__logincontainer {
+    @include size(100% 0px);
+    background-color: $form-background-color;
+    color: $form-text-font-color;
+    overflow: hidden;
+    display: none;
+}
+
+/* ==== STATES ==== */
+
+// Private state
+.sidebar-list__item.isPrivate {
+    background: $sidebar-list-item-background-color--private;
+    color: $sidebar-list-item-font-color--private;
+}
+
+// Selected state
+.sidebar-list__item.isSelected:not(.isDisabled) {
+    background: $sidebar-list-item-background-color--selected;
+    color: $sidebar-list-item-font-color--selected;
+}
+
+// Active state
+.sidebar-list__item.isActive:not(.isDisabled):not(.isClientArea) {
+    background: $sidebar-list-item-background-color--active;
+    color: $sidebar-list-item-font-color--active;
+    font-weight: $brand-font-weight-semibold;
+
+    & .sidebar-list-item:after {
+        visibility: visible;
+        opacity: 1;
+    };
+}
+
+// Disabled state
+.sidebar-list__item.isDisabled {
+    // background: $sidebar-list-item-background-color--disabled;
+    // color: $sidebar-list-item-font-color--disabled;
+}
+
+// Client area
+.sidebar-list__item.isClientArea {
+    @include box-sizing(border-box);
+//    background: red;
+    &.isDisabled {
+        // background: $sidebar-list-item-background-color;
+        // color: $sidebar-list-item-font-color;
+    }
+}
+
+
+/* ==== LIST-ITEM COMPONENT ==== */
+
+.sidebar-list-item {
+    @include mooze-vertical-align-wrapper();
+    width: $sidebar-width-extent;
+}
+
+// A list item group is an item that can contain two elements
+.sidebar-list-item--group {
+    height:100%;
+    @include device-dependent('line-height', $sidebar-list-item-height-map, 0, 0.5);
+    > * {
+        width: 50%;
+        display:inline-block;
+        vertical-align: middle;
+        @include mooze-vertical-align-wrapper();
+    }
+}
+
+/* ==== LIST-ITEM ELEMENTS ==== */
+
+.sidebar-list-item__icon {
+    @include device-dependent('font-size', $sidebar-list-item-font-size--icon-map);
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.sidebar-list-item__label {
+    @include device-dependent('font-size', $sidebar-list-item-font-size--label-map);
+}
+
+// = basic disclosure
+// .sidebar-list-item:after {
+//     @include font-awesome($sidebar-list-item-font-size--icon, $fa-var-angle-right);
+//     float: right;
+//     padding-right: 15px;
+//     padding-top: 3px;
+//     visibility: hidden;
+// }
+
+.sidebar-list-item:after {
+    content:"";
+    float: right;
+
+    // The color here can be a problem since we dont know the color of the content body
+    @include triangle(16px, $sidebar-list-item-disclosure-color, left);;
+
+    // == courtesy: http://apps.eky.hk/css-triangle-generator/
+    // @include size(0 0);
+    // border-style: solid;
+    // border-width: 8px 14px 8px 0;
+    // border-color: transparent $sidebar-list-item-disclosure-color transparent transparent;
+    // == better antialiasing on webkit browsers
+    // @include transform(rotate(360deg));
+
+    visibility: hidden;
+    opacity: 0;
+
+    // show the item after a short delay so it does not show up while the sidebar is being
+    // closed. In principle we could use a a delayed visibility switch instead of an opacity
+    // transition. However this delay of course happens also when the disclosure is removed
+    // which is bad e.g. when the client area is opened and the content layer is pushed to the right.
+    // OTOH no transition = the edge shows up for a moment before the sidebar closes
+    // @include transition(visibility 0s linear .3s);
+
+    // Animate the opacity
+    @include transition(opacity .0s linear .3s);
+}
+
+// On tablets in landscape mode the sidebar is always open. Do not wait before showing the disclosure.
+.form-factor-tablet .sidebar-list-item:after {
+    @include landscape() {
+        @include transition(opacity .0s linear .0s);
+    };
+}
+
+/* ==== CLIENT-AREA BUTTONS ==== */
+
+.client-area-button {
+    //float: right;
+    color: $brand-color-white;
+    font-size: .8em;
+    font-weight: $font-weight-regular;
+    text-align:right;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.client-area-button.isSelected {
+    color: lighten($text-link-font-color--selected, 30%);
+}

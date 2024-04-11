@@ -1,0 +1,7 @@
+.transform-origin-top {
+    @include transform-origin(left top);
+}
+
+.transform-origin-bottom {
+    @include transform-origin(left bottom);
+}

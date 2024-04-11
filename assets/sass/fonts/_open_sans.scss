@@ -1,0 +1,41 @@
+
+// Override font path
+$opensans-font-url-prefix: "../fonts/Open_Sans/OpenSans" !default;
+
+// Macros to generate url and src
+@function open-sans-url($style, $type: truetype) {
+    @return url('#{$opensans-font-url-prefix}-#{$style}.ttf') format('#{$type}');
+}
+
+@function open-sans-src($style) {
+    @if $style != 'Regular' {
+        @return local('Open Sans #{$style}'), local('OpenSans-#{$style}'), open-sans-url($style);
+    } @else {
+        @return local('Open Sans'), local('OpenSans'), open-sans-url('Regular');
+    }
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: $font-weight-light;
+  src: open-sans-src('Light');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: $font-weight-regular;
+  src: open-sans-src('Regular');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: $font-weight-semibold;
+  src: open-sans-src('Semibold');;
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: $font-weight-bold;
+  src: open-sans-src('Bold');
+}

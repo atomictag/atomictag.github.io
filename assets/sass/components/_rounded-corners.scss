@@ -1,0 +1,7 @@
+
+$border-radius: 10px;
+
+.rounded-corners-all {
+    @include border-top-radius($border-radius);
+    @include border-bottom-radius($border-radius);
+}

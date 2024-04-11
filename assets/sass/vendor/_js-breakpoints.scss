@@ -1,0 +1,31 @@
+@mixin defineBreakpoint($name) {
+    // store active breakpoint name in ::pseudo content
+    &:after {
+        content: $name;
+        visibility: hidden;
+        position: absolute;
+        clip: rect(0 0 0 0);
+        overflow: hidden;
+        width: 0;
+        height: 0;
+    }
+
+    // add fallback style using breakpoint name
+    .js-breakpoints-#{$name} {
+        position: absolute;
+    }
+}
+
+html:after {
+    @include defineBreakpoint("js-breakpoints-getComputedStyleTest");
+}
+
+body {
+    @for $i from 1 through length($range-keys) {
+        $key : nth($range-keys, $i);
+        @include device-media-query($key) {
+            @include defineBreakpoint($key);
+        }
+    }
+}
+

@@ -1,0 +1,55 @@
+/* =======================
+ * CONTENT
+ * ======================= */
+
+// This is based on iPad values. Must be fixed-up in Javascript
+// $content-max-width: (1024 - $sidebar-width-extent)!default;
+$content-max-width: 720px!default;
+
+.mooze-embedded {
+    .mooze-window--main .mooze-window__layer--content {
+        max-width: $content-max-width;
+        background-color: $content-layer-background-color;
+    }
+}
+
+.mooze-header--content {
+    background-color: $content-header-background-color;
+    color: $content-header-font-color;
+
+    .mooze-header__title {
+        font-weight: $brand-font-weight-semibold;
+    }
+
+    .mooze-header__button {
+        &.isSelected {
+
+        }
+        &.isDisabled {
+
+        }
+    }
+}
+
+.mooze-header__button {
+    white-space: nowrap;
+    @include ellipsis();
+}
+
+.mooze-header__button.isDisabled {
+    color: $content-header-font-color--disabled;
+}
+
+.mooze-header__button.mooze-header__button--navigation.isDisabled {
+    visibility: hidden;
+}
+
+.mooze-body--content {
+    background-color: $content-body-background-color;
+    color: $content-body-font-color;
+}
+
+.mooze-body--content-dark {
+    background-color: $content-background-color;
+    color: $content-body-font-color;
+}

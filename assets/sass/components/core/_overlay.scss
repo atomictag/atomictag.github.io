@@ -1,0 +1,21 @@
+// Basic styling of overlay window
+.mooze-window--overlay {
+    display: none;
+    .mooze-window__layer {
+        background: rgba(#aaaaaa, .5);
+    }
+}
+
+// The content of the overlay layer
+.mooze-overlay {
+    @extend .transform-origin-top;
+    @include position(absolute);
+    @include size(100% 100%);
+    background: transparent;
+    overflow: hidden;
+
+    .mooze-overlay__body {
+        // Nothing special for the general case
+        // see responsive variation
+    }
+}

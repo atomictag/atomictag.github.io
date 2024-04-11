@@ -1,0 +1,12 @@
+
+.dropdown-popup {
+
+}
+
+.dropdown-popup__content {
+    // This is here just so the "loader" icon has enough room. Not strictly necessary though.
+    min-width: 200px;
+}
+
+// Since I know you will want to add the triangle at the top (which means a lot of fun to position it later...)
+// , you can use the macro "@include triangle(16px, white, up);" and look at how it is doe in .sidebar-list-item:after

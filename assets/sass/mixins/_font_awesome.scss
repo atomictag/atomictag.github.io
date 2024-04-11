@@ -1,0 +1,11 @@
+
+@mixin font-awesome($size : false, $symbol : false) {
+    font-family: "FontAwesome";
+    font-weight: normal;
+    @if $size {
+        @include device-dependent('font-size', $size);
+    }
+    @if $symbol {
+        content: $symbol;
+    }
+}

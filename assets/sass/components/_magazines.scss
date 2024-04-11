@@ -1,0 +1,25 @@
+// .magazine-panel-container {
+//     @include transition(background-color $action-item-transition-duration .1s);
+// }
+
+.magazine-panel-container {
+     .panel {
+        @include transition(background-color $action-item-transition-duration .1s);
+    }
+
+     &.isSelected .panel {
+        background-color: rgba($action-item-background-color-light--selected, .8);
+    }
+
+     // &.isSelected img {
+     // 	opacity: .5;
+     // 	@include transition(none);
+     // }
+}
+
+// No transitions on android
+.android .magazine-panel-container {
+    .panel {
+        @include transition(none);
+    }
+}

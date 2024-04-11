@@ -1,0 +1,29 @@
+
+// Corner colors. Pendantically longer names.
+// You NEVER use them directly in your CSS but use/reuse
+// dedicated variables with some semantic value
+
+$corner-color-blue: #324C73; // navbar, sidebar-items
+
+$corner-color-anthracite: #4D5B64; // text
+
+$corner-color-blue-light:   #0E4A89; // headings
+$corner-color-blue-lighter: #C6DCEF; // login/logout, user icon top right
+
+
+$corner-color-blue-bright:   #235AA7; // ??
+$corner-color-blue-brighter: #007AFF; // ribbons, ticker count
+$corner-color-blue-brightest: #3D67A9; // selection magazines
+
+$corner-color-blue-dark:    #1F385F; // sidebar-items-private
+$corner-color-blue-darker:  lighten(#172E4D, 2%); // sidebar background
+$corner-color-blue-darkest: #132B4B; // sidebar-items.active
+
+$corner-color-grey-light:   #CCCCCC; // none
+$corner-color-grey-lighter: #EAECEB; // (pseudo grey) body background
+$corner-color-grey-dark:    #808080; // separators, first table headers
+$corner-color-grey-darker:  #333333; // separators, first table headers
+
+$corner-color-white: #ffffff;
+$corner-color-black: #000000;
+$corner-color-red:   #E00717;

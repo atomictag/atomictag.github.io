@@ -1,0 +1,156 @@
+
+$article-text-font-size-map: (
+    's' .9em,
+    'm' 1.0em
+)!default;
+$article-text-line-height-map: (
+    's' 1.5em,
+    'm' 1.6em
+)!default;
+
+$article-text-s-font-size-map: (
+    's' .7em,
+    'm' .8em
+)!default;
+$article-text-s-line-height-map: (
+    's' 1.5em,
+    'm' 1.6em
+)!default;
+
+$article-title-font-size-map: (
+    's' 1.0em,
+    'm' 1.8em
+)!default;
+$article-title-line-height-map: (
+    's' 1.2em,
+    'm' 1.2em
+)!default;
+
+$article-text-font-color: $default-text-font-color !default;
+
+.plain-text {
+    @include transition(color $action-item-transition-duration);
+    @include device-dependent('font-size', $article-text-font-size-map);
+    color: $default-text-font-color;
+}
+
+.plain-text-s {
+    @include transition(color $action-item-transition-duration);
+    @include device-dependent('font-size', $article-text-s-font-size-map);
+    color: $default-text-font-color;
+}
+
+.article-text {
+    @include transition(color $action-item-transition-duration);
+    @include device-dependent('font-size', $article-text-font-size-map);
+    @include device-dependent('line-height', $article-text-line-height-map);
+    color: $article-text-font-color;
+}
+
+.article-text-s {
+    @include transition(color $action-item-transition-duration);
+    @include device-dependent('font-size', $article-text-s-font-size-map);
+    @include device-dependent('line-height', $article-text-s-line-height-map);
+    color: $article-text-font-color;
+}
+
+.article-text--aside {
+    @include device-dependent('font-size', $article-text-s-font-size-map, 0, .8);
+    @include device-dependent('line-height', $article-text-s-line-height-map, 0, 1.5);
+}
+
+.article-title {
+    @include device-dependent('font-size', $article-title-font-size-map);
+    @include device-dependent('line-height', $article-title-line-height-map);
+    color: $article-text-font-color;
+    font-weight: $font-weight-light;
+}
+
+@include device-class(text--small) {
+    font-size: .95em;
+}
+
+@include device-class(text--smaller) {
+    font-size: .8em;
+}
+
+.link-text {
+
+}
+
+.link-text--underlined {
+    // Use a border instead of "text-decoration: underline"
+    // to increase the gap between text and underline
+    border-bottom: 1px dotted;
+    padding-bottom: 1px;
+}
+
+.link-text.isSelected {
+    color: $text-link-font-color--selected;
+    // Use a border instead of "text-decoration: underline"
+    // to increase the gap between text and underline
+    border-bottom: 1px dotted;
+    padding-bottom: 1px;
+}
+
+.link-text.isDisabled {
+    border-bottom: none;
+}
+
+.article-text,
+.article-text-s,
+.article-text--aside {
+    strong {
+        font-weight: $font-weight-bold;
+    }
+}
+
+// No transitions on Android
+.android {
+    .plain-text,
+    .plain-text-s,
+    .article-text,
+    .article-text-s,
+    .article-title {
+        @include transition(none);
+    }
+}
+
+.isSelected {
+    .plain-text,
+    .plain-text-s,
+    .article-text,
+    .article-text-s,
+    .article-title {
+        color: $action-item-font-color--selected;
+    }
+}
+
+.isActive {
+    .plain-text,
+    .plain-text-s,
+    .article-text,
+    .article-text-s,
+    .article-title {
+        @include transition(none);
+        color: $action-item-font-color--active;
+    }
+}
+
+// Text-transform
+.uppercase {
+    text-transform:uppercase;
+}
+.lowercase {
+    text-transform:lowercase;
+}
+.capitalize {
+    text-transform:capitalize;
+}
+.no-text-transform {
+    text-transform:none;
+}
+//
+.nowrap {
+    white-space: nowrap;
+}

@@ -1,0 +1,19 @@
+
+.jumbotron-carousel {
+    @include position(relative);
+    @include device-dependent('height', ('s' 240px, 'm' 380px));
+    @include border-top-radius(10px);
+    @include border-bottom-radius(10px);
+    width: 100%;
+    background: #ffffff;
+    overflow: hidden;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+    // Optionally animate height transitions
+    @include transition(height 0.25s ease);
+}
+
+.jumbotron-carousel__image {
+    @include position(absolute, 0px 0px 0px 0px);
+    background: url('http://lorempixel.com/768/320/food') center no-repeat;
+    background-size: cover;
+}

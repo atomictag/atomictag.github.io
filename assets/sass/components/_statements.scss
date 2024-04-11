@@ -1,0 +1,84 @@
+
+[data-action="selectStatement"] {
+    min-width: 80px;
+}
+
+[data-action="selectCard"], [data-action="selectStatement"] {
+    &.composite-item.isSelected {
+        @include transition(none);
+        background-color: lighten($corner-color-anthracite, 20%);
+    }
+    &.composite-item.isActive, &.composite-item.isDisabled {
+        @include transition(none);
+        background-color: lighten($corner-color-anthracite, 40%);
+    }
+}
+
+[data-action="selectStatement"] {
+    .fa {
+        @include transition(color $action-item-transition-duration);
+    }
+    &.isSelected, &.isActive, &.isDisabled {
+        color: $brand-color-white;
+    }
+}
+
+.statements-selector-pointer-up {
+    @include position(relative);
+    height:15px;
+    width:100%;
+
+    // Simulate a box shadow
+    &:before {
+        @include position(absolute, -17px 0 0 50%);
+        @include transform(translateX(-50%));
+        @include triangle(36px, #ccc, up);
+        content:"";
+        margin:auto;
+    }
+
+    &:after {
+        @include position(absolute, -12px 0 0 50%);
+        @include transform(translateX(-50%));
+        @include triangle(32px, $brand-color-white, up);
+        content:"";
+        margin:auto;
+    }
+}
+
+.statements-search-date-selector {
+    display: inline-block;
+    top:50%;
+    padding: 0.5em 1.5em 0.5em 0.5em;
+    border-bottom: 2px solid $content-body-font-color;
+    font-weight: $font-weight-semibold;
+    z-index: 100;
+    font-size: 0.8em;
+    min-width: 160px;
+    color:inherit;
+    position: relative;
+
+    &:after {
+        @include position(absolute, 50% 0 0 0);
+        @include transform(translateY(-50%));
+        font-family: 'FontAwesome';
+        content: $fa-var-caret-down; // $fa-var-caret-down;
+        text-align: center;
+        right: 0.25em;
+        @include transform(translate3d(0,-50%,0)); //  rotate3d(0,0,1,45deg)
+        @include transition(transform .5s);
+        @include transform-origin(50% 50%);
+    }
+}
+
+.statements-search-date-selector.isActive {
+    &:after {
+        @include transform(translate3d(0,-50%,0) rotate3d(0,0,1,-180deg));
+    }
+}
+
+.statements-search-amount-selector {
+    display: inline-block;
+    padding: 0.5em 1.5em 0.5em 0.5em;
+    min-width: 250px;
+}

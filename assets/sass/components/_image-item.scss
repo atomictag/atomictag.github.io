@@ -1,0 +1,102 @@
+
+$image-item-height-map: (
+    's' 225px,
+    'm' 186px,
+    'iphone-320x480' 150px,
+    'android-360x640' 300px,
+    'android-note' 340px
+    // 'android-nexus-7' 186px
+);
+
+$image-item--list-height-map: (
+    's' 216px,
+    'm' 325px,
+    'iphone-320x480' 205px,
+    'android-nexus-7' 250px,
+    'android-note' 292px,
+    'android-tab-600x1024' 240px,
+    'android-tab-601x962' 240px,
+);
+
+$image-item--emotions-height-map: (
+    's' 140px,
+);
+
+.image-item {
+    display:table;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+
+    width:100%;
+
+    // Children are table rows
+    & > * {
+        display:table-row;
+    }
+    overflow: hidden;
+}
+
+.image-item.image-item--dashboard  {
+    @include device-dependent('height', $image-item-height-map);
+}
+
+.image-item.image-item--emotions {
+    @include device-dependent('height', $image-item--emotions-height-map);
+}
+
+.image-item.image-item--list {
+    @include device-dependent('height', $image-item--list-height-map);
+}
+
+.image-item.image-item--overlay-top {
+    // Add a virtual stretchable row with 100% height
+    &:after {
+        display:table-row;
+        height: 100%;
+        content:"";
+    }
+}
+
+.image-item.image-item--overlay-bottom {
+    // Add a virtual stretchable row with 100% height
+    &:before {
+        display:table-row;
+        height: 100%;
+        content:"";
+    }
+}
+
+.image-item .image-item__overlay {
+    background-color:rgba($brand-color-white,.85);
+}
+
+.image-item .image-item__overlay.image-item__overlay--solid {
+    background-color:$brand-color-white;
+}
+
+/* ==== PANEL LIST DATA-ACTIONS ==== */
+
+[data-action] .image-item__overlay {
+    @include transition(background-color $action-item-transition-duration $action-item-transition-delay);
+}
+
+// No transitions on android
+.android [data-action] .image-item__overlay {
+    @include transition(none);
+}
+
+[data-action]  {
+    &.isSelected .image-item__overlay {
+        background-color: rgba($action-item-background-color--selected, .8);
+    }
+    &.isActive .image-item__overlay {
+        @include transition(none);
+        background-color: rgba($action-item-background-color--active, .8);
+    }
+    &.isSelected, &.isActive {
+        .composite-item__icon {
+            color: $brand-color-white;
+        };
+    }
+}

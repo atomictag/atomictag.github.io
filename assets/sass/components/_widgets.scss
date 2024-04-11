@@ -1,0 +1,55 @@
+.widget-group {
+    @extend .group;
+}
+
+.widget-container {
+    @extend .transform-origin-top;
+    @include position(relative);
+    display: block;
+    float: left;
+    min-height: 1px;
+    // Default height. This is changed dynamically in js if an aspect ratio is defined in the layout params
+    @include device-dependent('height', ('s' 140px, 'm' 180px));
+    // Optionally animate height transitions
+    @include transition(height 0.25s ease);
+}
+
+.widget {
+    // Position the widget absolutely.
+    // "margins" are defined as top/right/bottom/left insets
+    @include position(absolute, 0px 10px 20px 10px);
+    @include border-top-radius(10px);
+    @include border-bottom-radius(10px);
+    background-color: #ffffff;
+    overflow: hidden;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+}
+
+.widget-content {
+    @include size(100% 100%);
+    display: table;
+    background-color: #ffffff;
+}
+
+.widget-content__header {
+    background-color: #D6DDE5;
+
+    display:table-row;
+    vertical-align: middle;
+    height: 10%;
+}
+
+.widget-content__body {
+    overflow: hidden;
+    display:table-row;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.widget-content__body {
+
+    .transition-flip-wrapper, .transition-slide-wrapper {
+        height: 100%;
+    }
+
+}

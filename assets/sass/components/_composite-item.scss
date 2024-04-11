@@ -1,0 +1,215 @@
+
+/*
+    .composite-item-list
+      (.composite-item-list__header)
+      .composite-item-list__item
+        .composite-item
+            .composite-item__text
+            (.composite-item__icon)
+ */
+
+$composite-item__icon--small-size-map:
+    (
+      's' 0.8em,
+      'm' 1em
+    );
+
+$composite-item__icon--big-size-map:
+    (
+      's' 1.6em,
+      'm' 2.5em
+    );
+
+$composite-item__icon-size-map:
+    (
+      's' 1.0em,
+      'm' 1.2em
+    );
+
+/* ==== COMPOSITE ITEM LIST COMPONENT ==== */
+
+.composite-item-list {
+
+}
+
+/* ==== COMPOSITE ITEM LIST SCAFFOLDING ==== */
+
+.composite-item-list__item {
+    @include box-sizing(border-box);
+    border-bottom: 1px solid $separator-color;
+    background-color: $brand-color-white;
+}
+
+.composite-item-list__item:last-of-type{
+    border-bottom: none;
+}
+
+.composite-item-list__header {
+    color: $corner-color-white;
+    background-color: $corner-color-grey-dark;
+}
+
+.composite-item-list__header--dark {
+    color: $corner-color-white;
+    background-color: #8691a0;
+}
+
+.composite-item-list__header--darker {
+    color: $corner-color-white;
+    background-color: #4a555e;
+}
+
+.darkbackground {
+    color: $corner-color-white;
+}
+
+/* ==== COMPOSITE ITEM ==== */
+
+.composite-item {
+    display:table;
+    @include size(100%);
+    @include box-sizing(border-box);
+
+    > * {
+        @include device-class(show, true) {
+            display: table-cell!important;
+        }
+    }
+}
+
+.composite-item__content, .composite-item__text {
+
+    display:table-cell;
+    vertical-align: middle;
+    width:100%;
+}
+
+// Icon
+.composite-item__icon {
+
+    display: table-cell;
+    vertical-align: middle;
+    white-space: nowrap;
+    @include transition(color $action-item-transition-duration);
+    &.composite-item__icon--top {
+        vertical-align: top;
+    }
+
+}
+
+// No transitions on android
+.android .composite-item__icon {
+    @include transition(none);
+}
+
+// Icon BEFORE the text
+.composite-item__icon {
+    text-align: left;
+    @include device-dependent("font-size", $composite-item__icon-size-map);
+}
+
+// Icon AFTER the text
+.composite-item__text + .composite-item__icon, .composite-item__content + .composite-item__icon {
+    text-align: right;
+    @include device-dependent("font-size", $composite-item__icon-size-map);
+    // Icon SMALL
+    &.composite-item__icon--small {
+        @include device-dependent("font-size", $composite-item__icon--small-size-map);
+    }
+    // Icon BIG
+    &.composite-item__icon--big {
+        @include device-dependent("font-size", $composite-item__icon--big-size-map);
+    }
+}
+
+// Icon Bright
+.composite-item__icon--bright {
+    color:$disclosure-color;
+}
+
+// Icon critical, warn, info
+.composite-item__icon--critical {
+    color:red;
+}
+.composite-item__icon--warn {
+    color:orange;
+}
+.composite-item__icon--info {
+    color:blue;
+}
+
+// Disclosure
+.composite-item__icon--disclosure {
+    &:before {
+        @include font-awesome();
+        content:$fa-var-angle-right;
+    }
+}
+
+// Chevron
+.composite-item__icon--chevron {
+    &:before {
+        @include font-awesome();
+        content:$fa-var-chevron-right;
+    }
+}
+
+// External link
+.composite-item__icon--external-link {
+    &:before {
+        @include font-awesome();
+        content:$fa-var-external-link;
+    }
+}
+
+// Item with highlight
+.composite-item--highlight {
+    background-color: #f7f9f9;
+}
+
+// Item with secondary background color
+.issecondary {
+    background-color: #e9e7e7;
+}
+
+
+/* ==== SPANS WITHIN GROUPED_LIST_ITEMS ===== */
+
+.composite-item > .group, .composite-item__content > .group {
+    display:table-row;
+
+    > [class^="span-"],
+    > [class*=" span-"] {
+        display:table-cell;
+        vertical-align: middle;
+        float:none;
+    }
+}
+
+/* ==== GROUPED LIST DATA-ACTIONS ==== */
+
+.composite-item[data-action], .composite-item-list__item[data-action] {
+    @include transition(background-color $action-item-transition-duration);
+    &.noActionTransition, &.noActionTransition .hh, &.noActionTransition .composite-item__icon {
+        @include transition(none);
+    }
+    &.isSelected {
+        background-color: $action-item-background-color--selected;
+    }
+    &.isActive {
+        @include transition(none);
+        background-color: $action-item-background-color--active;
+    }
+    &.isSelected, &.isActive {
+        & .composite-item__icon {
+            color: $brand-color-white;
+        };
+    }
+}
+
+// No transitions on Android
+.android {
+    .composite-item[data-action], .composite-item-list__item[data-action] {
+        @include transition(none);
+    }
+}

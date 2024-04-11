@@ -1,0 +1,31 @@
+.ellipsis-oneliner {
+//	@include ellipsis();
+	@include ellipsis-multiline(1, auto);
+}
+
+.ellipsis-twoliner {
+    @include ellipsis-multiline(2, auto);
+    padding-bottom: 0.1em;
+}
+
+.ellipsis-threeliner {
+    @include ellipsis-multiline(3, auto);
+    padding-bottom: 0.1em;
+}
+
+.ellipsis-fourliner {
+    @include ellipsis-multiline(4, auto);
+    padding-bottom: 0.1em;
+}
+
+.ellipsis-oneliner--swipe {
+//	@include ellipsis();
+	@include ellipsis-multiline(1, 1.4em);
+	//height: 1.4em;
+}
+
+.ellipsis-twoliner--swipe {
+	@include ellipsis-multiline(2, 2.6em);
+	//height: auto;
+	padding-bottom: 0.1em;
+}

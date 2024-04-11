@@ -1,0 +1,99 @@
+
+// This generates (pseudo code):
+//
+//     .border-bottom {
+//         border-bottom: 1px solid $brand-color-grey-lighter;
+//     }
+//     .s-border-bottom {
+//         only on "phone" {
+//             border-bottom: 1px solid $brand-color-grey-lighter;
+//         }
+//     }
+//     .m-border-bottom {
+//         only on "tablet" {
+//             border-bottom: 1px solid $brand-color-grey-lighter;
+//         }
+//     }
+
+// =========
+
+// No borders at all
+@include device-class(border-none) {
+    border: none;
+}
+
+// All borders
+@include device-class(border-all) {
+    @include box-sizing(border-box);
+    border: 1px solid $brand-color-grey-lighter;
+}
+
+// =========
+
+// border-left
+@include device-class(border-left) {
+    @include box-sizing(border-box);
+    border-left: 1px solid $brand-color-grey-lighter;
+}
+
+// No border-left
+@include device-class(border-left-none) {
+    border-left: none;
+}
+
+// =========
+
+// border-right
+@include device-class(border-right) {
+    @include box-sizing(border-box);
+    border-right: 1px solid $brand-color-grey-lighter;
+}
+
+// No border-right
+@include device-class(border-right-none) {
+    border-right: none;
+}
+
+// =========
+
+// border-bottom
+@include device-class(border-bottom) {
+    @include box-sizing(border-box);
+    border-bottom: 1px solid $brand-color-grey-lighter;
+}
+
+// border-bottom--darker
+@include device-class(border-bottom--darker) {
+    border-bottom: 1px solid #4a555e;
+}
+
+// No border-bottom
+@include device-class(border-bottom-none) {
+    border-bottom: none;
+}
+
+// =========
+
+// border-top
+@include device-class(border-top) {
+    @include box-sizing(border-box);
+    border-top: 1px solid $brand-color-grey-lighter;
+}
+
+// border-top--darker
+@include device-class(border-top--darker) {
+    border-top: 1px solid #4a555e;
+}
+
+// border-top--dark
+@include device-class(border-top--dark) {
+    border-top: 1px solid #8691a0;
+}
+
+
+// No border-top
+@include device-class(border-top-none) {
+    border-top: none;
+}
+
+// =========

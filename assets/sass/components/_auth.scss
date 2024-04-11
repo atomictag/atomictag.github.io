@@ -1,0 +1,64 @@
+
+.auth-form {
+    @include size(100%);
+    color: $default-text-font-color--dimmed;
+}
+
+.auth-form__header {
+    text-align: center;
+}
+
+.auth-form__inputs {
+
+}
+
+.auth-title {
+    color: inherit;
+}
+
+.auth-description {
+    color: inherit;
+    line-height: 1.3em;
+
+    .link-text.isSelected {
+        color: lighten($text-link-font-color--selected, 30%);
+    }
+}
+
+.auth-alerts-list {
+    background-color: rgba($brand-color-white, .5);
+}
+
+.auth-alerts-list__item {
+    background-color: rgba($brand-color-white, .5);
+
+    &:last-of-type {
+        background-color: rgba($brand-color-white, .8);
+    }
+}
+
+.auth-help {
+    background-color: $form-background-color--light;
+    color: $form-text-font-color--dark;
+}
+
+.auth-error {
+    color: red;
+}
+
+/* ===== DIALOG ===== */
+
+.auth-dialog {
+    background-color: $form-background-color;
+    color: $form-text-font-color;
+}
+
+.auth-dialog__header {
+    background-color: $sidebar-list-item-background-color;
+    color: $sidebar-list-item-font-color;
+}
+
+.auth-dialog__body {
+    @include position(relative);
+    @include size(460px 325px);
+}

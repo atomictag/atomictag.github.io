@@ -1,0 +1,62 @@
+
+// Thanks: http://css-tricks.com/snippets/css/corner-ribbon/
+
+.ribbon-wrapper {
+    @include size(85px 85px);
+    @include position(absolute, -3px -3px 0 0);
+    overflow: hidden;
+}
+
+.ribbon {
+   text-align: center;
+   font-size: 14px;
+   font-weight: bold;
+   line-height: 15px;
+   text-transform:uppercase;
+
+   //text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;
+
+   @include transform(rotate(45deg));
+   @include position(relative, 15px 0 0 -5px);
+   @include size(120px auto);
+
+   padding: 7px 0;
+   background-color: #aaa;
+
+   color: $brand-color-white;
+   box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.ribbon:before, .ribbon:after {
+   content: "";
+   border-top:   3px solid #aaa;
+   border-left:  3px solid transparent;
+   border-right: 3px solid transparent;
+   position:absolute;
+   bottom: -3px;
+}
+
+.ribbon:before {
+   left: 0;
+}
+.ribbon:after {
+   right: 0;
+}
+
+.ribbon {
+    @include background-image( linear-gradient(darken($corner-color-blue-brighter, 10%), $corner-color-blue-brighter) );
+}
+
+.ribbon-wrapper-left {
+    @include position(absolute, -3px 0 0 -15px);
+    .ribbon {
+      @include transform(rotate(-45deg));
+      @include position(relative, 15px 0 0 -15px);
+    }
+}
+
+.ribbon--small {
+  font-size: 13px;
+  line-height: 1em;
+  padding: 5px 0;
+}

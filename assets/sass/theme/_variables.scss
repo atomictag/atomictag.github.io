@@ -1,0 +1,129 @@
+
+// Color definitions
+@import "colors";
+
+/* =============================== *
+    BRAND COLORS
+ * =============================== */
+$brand-color-white: $corner-color-white;
+$brand-color-black: $corner-color-black;
+$brand-color-red:   $corner-color-red;
+$brand-color-grey:  $corner-color-grey-dark;
+$brand-color-grey-light: $corner-color-grey-light;
+$brand-color-grey-lighter: #eeeeee;// $corner-color-grey-lighter;
+$brand-color-grey-dark: $corner-color-grey-darker;
+
+
+/* =============================== *
+    BRAND FONTS
+ * =============================== */
+
+$brand-font-weight-light    : $font-weight-light;
+$brand-font-weight-regular  : $font-weight-regular;
+$brand-font-weight-semibold : $font-weight-semibold;
+$brand-font-weight-bold     : $font-weight-bold;
+
+/* =============================== *
+    WINDOWS
+ * =============================== */
+
+// Window-main background
+$window-main-background-color: #e5e8e8;// $corner-color-black;
+
+/* =============================== *
+    SIDEBAR
+ * =============================== */
+
+// Sidebar - backgrounds
+$sidebar-layer-background-color: inherit;// $corner-color-blue-darker;
+    $sidebar-header-background-color: white;// $corner-color-blue;
+    $sidebar-body-background-color: darken(#e5e8e8, 10); //white; //$corner-color-blue-darker;
+        $sidebar-list-background-color: darken(#e5e8e8, 30); //$corner-color-blue-darkest;
+            $sidebar-list-item-background-color: darken(#e5e8e8, 30); //$corner-color-blue;
+            $sidebar-list-item-background-color--selected: darken(#e5e8e8, 60); //$corner-color-blue-bright;
+            $sidebar-list-item-background-color--active: darken(#e5e8e8, 20); //$corner-color-blue-darkest;
+            //$sidebar-list-item-background-color--disabled: $sidebar-list-item-background-color;
+            $sidebar-list-item-background-color--private: $corner-color-blue-dark;
+
+// Sidebar - fonts
+$sidebar-list-item-font-color: $corner-color-blue-darkest;// $corner-color-blue-lighter;
+$sidebar-list-item-font-color--selected: white;//$sidebar-list-item-font-color;
+$sidebar-list-item-font-color--active: $corner-color-blue-darkest; //$corner-color-white;
+//$sidebar-list-item-font-color--disabled: $corner-color-grey-light;
+$sidebar-list-item-font-color--private: $sidebar-list-item-font-color;
+
+// Sidebar misc
+$sidebar-list-item-disclosure-color: $corner-color-white;// $corner-color-grey-lighter;
+
+/* =============================== *
+    CONTENT
+ * =============================== */
+
+// Content
+$content-background-color: #ffffff;//#e5e8e8;// $corner-color-grey-lighter;
+$content-background-color--light: #e5e8e8;// $corner-color-white;
+
+$content-layer-background-color: #e5e8e8;;// $content-background-color--light;
+    $content-header-background-color: white;// $corner-color-blue;
+    $content-body-background-color: #e5e8e8;// $content-background-color--light;
+
+// Content - fonts
+$content-header-font-color: #283498;// $corner-color-white;
+$content-header-font-color--disabled: $corner-color-grey-light;
+//
+$content-body-font-color: $corner-color-anthracite;
+
+/* =============================== *
+    VIEWS - CONTENT
+ * =============================== */
+
+// Splashscreen
+$splashscreen-background-color: white; //darken(#e5e8e8, 20);
+
+// Text
+$default-text-font-color: $corner-color-anthracite;
+$default-text-font-color--dimmed: lighten($corner-color-anthracite, 30%);
+
+// Headings
+$headings-font-color:  $default-text-font-color;
+$headings-font-color--accented: $corner-color-blue-light;
+$headings-font-color--dimmed: $default-text-font-color--dimmed;
+
+// Separators
+$separator-color: $corner-color-grey-lighter;
+
+// Shadows
+$shadow-color: darken($corner-color-grey-lighter, 20%);
+
+// Ribbons
+$ribbon-background-color: $corner-color-blue-brighter;
+
+// Forms
+$form-background-color: $corner-color-blue-darker;
+$form-text-font-color: $corner-color-grey-lighter;
+//
+$form-background-color--light: $corner-color-blue-lighter;
+$form-text-font-color--dark: $corner-color-blue-darker;
+
+// Icon colors
+$icon-color: $headings-font-color;
+$icon-color-bright: $corner-color-blue-bright;
+
+// Disclosures
+$disclosure-color: $corner-color-blue-bright;
+
+// Action items
+$action-item-background-color-light--selected: $corner-color-blue-brightest;
+$action-item-background-color--selected: $corner-color-blue-bright;
+$action-item-background-color--active: $corner-color-blue-dark;
+$action-item-background-color-dark--selected: $corner-color-blue-dark;
+$action-item-background-color-dark--active: $corner-color-blue-darkest;
+//
+$action-item-font-color--selected: $brand-color-white;
+$action-item-font-color--active: $brand-color-white;
+//
+$action-item-transition-duration: .25s;
+$action-item-transition-delay: .1s;
+
+// Links
+$text-link-font-color--selected: $corner-color-blue-bright;

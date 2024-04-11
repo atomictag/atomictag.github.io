@@ -1,0 +1,37 @@
+/*
+    <div class="transition-flip-container">
+        <div class="transition-flip-wrapper">
+            <div class="transition-flip-front"></div>
+            <div class="transition-flip-back"></div>
+        </div>
+    </div>
+ */
+
+.transition-flip-container {
+    @include perspective(1000);
+}
+
+.transition-flip-wrapper {
+    @include transition(all 0.6s ease);
+    @include transform-style(preserve-3d);
+    @include position(relative);
+
+    &.flipped {
+        @include transform(rotateY(-180deg));
+    }
+
+    .transition-flip-front {
+        @include position(absolute);
+        @include size(100%);
+        @include set-single-sided();
+        z-index: 2;
+    }
+
+    .transition-flip-back {
+        @include position(absolute, 0px 0px 0 0);
+        @include size(100%);
+        @include set-single-sided();
+        @include transform(rotateY(180deg));
+    }
+
+}

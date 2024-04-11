@@ -1,0 +1,26 @@
+
+
+.pure-button-primary {
+    background-color: $corner-color-blue-brighter;
+}
+
+.pure-button.pure-button--fill-width {
+    width:100%;
+}
+
+[data-action]  {
+
+    &.isSelected, &.isActive {
+        &.pure-button-primary, .pure-button-primary {
+            background-color: $action-item-background-color--active;
+            color: $brand-color-white;
+        };
+    }
+    &.isDisabled {
+        &.pure-button-primary, .pure-button-primary {
+            background-color: $brand-color-grey-dark;
+            color: rgba($brand-color-grey-light, .8);
+        };
+    }
+
+}

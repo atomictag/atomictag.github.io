@@ -1,0 +1,112 @@
+
+// Development stuff
+
+.fps-meter {
+    @include position(absolute, 0 0 0px 0px);
+    @include size(100% 1.4em);
+    opacity: .6;
+    background-color: yellow;
+    z-index:999;
+    font-size:.8em;
+}
+
+
+@mixin reveal-breakpoints($map) {
+    $keys: map-keys($map);
+    $code:"";
+    @for $i from 1 through length($keys) {
+        $code:"#{$code}0";
+    }
+    @for $i from 1 through length($keys) {
+        $key : nth($keys, $i);
+        @if $key != "" {
+            @include device-media-query($key) {
+                // &:after {
+                //     content: " #{$key} ";
+                //     font-weight:bold;
+                // }
+                > span:nth-child(#{$i}) {
+                    &:after {
+                        content: " #{$key} ";
+                        color: red;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.reveal-breakpoints {
+    > span {
+        display:none;
+        &:after {
+            content: " \271D ";
+        };
+        &:nth-child(-n+#{length(map-keys($breakpoints))}) {
+            display:inline;
+        }
+    }
+    @include reveal-breakpoints($breakpoints);
+}
+
+.reveal-custom-breakpoints {
+    > span {
+        display:none;
+        &:after {
+            content: " \271D ";
+        };
+        &:nth-child(-n+#{length(map-keys($mooze-breakpoints))}) {
+            display:inline;
+        }
+    }
+    @include reveal-breakpoints($mooze-breakpoints);
+}
+
+
+
+
+/* =======================================
+ *
+ *              --\DEMO TIME/--
+ *
+ * ======================================= */
+
+
+
+
+
+
+
+/* ============== CHEATSHEET ===========
+
+.box {
+    color: white;
+    background-color: blue;
+}
+
+.box {
+    @include device-dependent('background-color', ( 'm' (green magenta) ));
+}
+
+@include device-class(box--big) {
+    font-size: 2em;
+}
+
+@include device-class(box--inline) {
+    display: inline-block;
+}
+
+.box.isSelected {
+    background-color: navy;
+}
+
+.box.isActive {
+    background-color: red;
+}
+
+.form-factor-desktop
+.box:not(.isActive):hover {
+    @extend .box.isSelected;
+};
+
+ */

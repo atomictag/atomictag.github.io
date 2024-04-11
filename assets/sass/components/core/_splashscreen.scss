@@ -1,0 +1,13 @@
+// A simple splashscreen with a centered floating logo
+.splashscreen {
+    @include position(absolute, 0px 0px 0px 0px);
+    @include background(url('../images/koalition_logo.png') center center no-repeat);
+    background-color: $splashscreen-background-color;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+// No logo in cordova.
+.cordova .splashscreen {
+    background: $splashscreen-background-color;
+}

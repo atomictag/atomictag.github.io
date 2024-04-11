@@ -1,0 +1,36 @@
+
+.transactions__description {
+
+}
+
+.transactions__description-text {
+    overflow: hidden;
+    padding-bottom: 0.1em;
+}
+
+.transactions__description-icon {
+    vertical-align: top;
+    padding-right: .5em;
+    padding-left: .5em;
+    visibility: hidden;
+}
+
+.transactions__description--collapsible {
+
+    .transactions__description-icon {
+        visibility: visible;
+    }
+}
+
+.transactions__description--collapsed {
+
+    .transactions__description-text {
+        // Same as ellipsis-twoliner
+        @include ellipsis-multiline(2, auto);
+        padding-bottom: 0.1em;
+    }
+}
+
+.transactions__amount {
+    min-width: 50px;
+}

@@ -1,0 +1,14 @@
+
+.card-stack-container {
+
+}
+
+.card-stack {
+    @include position(relative);
+    @include size(100%);
+    margin:auto;
+}
+
+.card-stack__card {
+    @include position(absolute);
+}

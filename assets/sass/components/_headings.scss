@@ -1,0 +1,153 @@
+$headings-class : 'hh';
+$headings-size-map:
+    ( 's'   ('xs' 0.65em, 's' 0.9em, 'm' 1.1em, 'l' 1.3em, 'xl' 4em)),
+    ( 'm'   ('xs' 0.85em, 's' 1.1em, 'm' 1.3em, 'l' 1.8em, 'xl' 4em)),
+    ( 'l'   ('xs' 0.85em, 's' 1.1em, 'm' 1.3em, 'l' 1.8em, 'xl' 4em)),
+;
+$headings-line-height-map:
+    ( 's'   ('xs' 1.3em, 's' 1.3em, 'm' 1.3em, 'l' 1.3em, 'xl' 2em)),
+    ( 'm'   ('xs' 1.3em, 's' 1.3em, 'm' 1.3em, 'l' 1.3em, 'xl' 2em)),
+    ( 'l'   ('xs' 1.3em, 's' 1.3em, 'm' 1.3em, 'l' 1.3em, 'xl' 2em))
+;
+
+// Consider automating line-height based on some criteria like the following:
+// http://jsfiddle.net/redclover/mkYtY/
+// @mixin font-size($font-size, $line-height:true){
+//     font-size:$font-size;
+//     font-size:($font-size / $base-font-size)*1rem;
+//     @if $line-height == true{
+//         line-height:ceil($font-size / $base-line-height) * ($base-line-height / $font-size);
+//     }
+// }
+
+// Base headings class (hh)
+.#{$headings-class} {
+    color: $headings-font-color;
+    font-weight: $brand-font-weight-semibold;
+    @include transition(color $action-item-transition-duration /* $action-item-transition-delay */);
+}
+
+// No transitions on Android
+.android {
+    .#{$headings-class} {
+        @include transition(none);
+    }
+}
+
+@function value-for-range-and-suffix($map, $range, $suffix) {
+    @return map-get(map-get($map, $range), $suffix );
+}
+
+@function keys-for-range($map, $range) {
+    @return map-keys(map-get($map, $range));
+}
+
+//   hh-s,   hh-m,   hh-l
+// s-hh-s, s-hh-m, s-hh-l
+// m-hh-s, m-hh-m, m-hh-l
+@mixin generate-text-variants($class, $size-map, $line-height-map) {
+    $ranges: map-keys($size-map);
+    @for $i from 1 through length($ranges) {
+        $range : nth($ranges, $i); // 's', 'm', 'l'
+        $suffixes : keys-for-range($size-map, $range); // ( 'xs', 's', 'm', 'l', 'huge' )
+
+        // Loop through the suffixes to build the variants for this range.
+        // Build first all the non-prefixed variants and then the prefixed versions,
+        // so that prefixed variants take precedence on the non-prefixed ones.
+
+        // the non-prefixed variant, i.e. xx-s, xx-m etc.
+        @for $i from 1 through length($suffixes) {
+            $suffix : nth($suffixes, $i); // 'xs', 's', 'm', 'l', 'huge'
+            $size   : value-for-range-and-suffix($size-map, $range, $suffix ); // 0.65, 0.85, ...
+            $line-height  : value-for-range-and-suffix($line-height-map, $range, $suffix );
+
+            .#{$class}-#{$suffix} {
+                @include device-media-query($range) {
+                    font-size: $size;
+                    line-height: $line-height;
+                }
+            }
+        }
+
+        // the prefixed variant, i.e. s-xx-s, s-xx-m etc.
+        @for $i from 1 through length($suffixes) {
+            $suffix : nth($suffixes, $i); // 'xs', 's', 'm', 'l', 'huge'
+            $size   : value-for-range-and-suffix($size-map, $range, $suffix ); // 0.65, 0.85, ...
+            $line-height  : value-for-range-and-suffix($line-height-map, $range, $suffix );
+
+            .#{$range}-#{$class}-#{$suffix} {
+                @include device-media-query($range) {
+                    font-size: $size;
+                    line-height: $line-height;
+                }
+            }
+        }
+
+
+    }
+}
+
+// Generate headings
+@include generate-text-variants($headings-class, $headings-size-map, $headings-line-height-map);
+
+// hh--light, s-hh--light, m-hh--light, l-hh--light
+@include device-class(#{$headings-class}--light) {
+    font-weight: $brand-font-weight-light;
+}
+
+// hh--regular, s-hh--regular, m-hh--regular, l-hh--regular
+@include device-class(#{$headings-class}--regular) {
+    font-weight: $brand-font-weight-regular;
+}
+
+// hh--strong, s-hh--strong, m-hh--strong, l-hh--strong
+@include device-class(#{$headings-class}--strong) {
+    font-weight: $brand-font-weight-semibold;
+}
+
+// hh--stronger, s-hh--stronger, m-hh--stronger, l-hh--stronger
+@include device-class(#{$headings-class}--stronger) {
+    font-weight: $brand-font-weight-bold;
+}
+
+// hh--accented, s-hh--accented, m-hh--accented, l-hh--accented
+@include device-class(#{$headings-class}--accented) {
+    color: $headings-font-color--accented;
+}
+
+// hh--dimmed, s-hh--dimmed, m-hh--dimmed, l-hh--dimmed
+@include device-class(#{$headings-class}--dimmed) {
+    color: $headings-font-color--dimmed;
+}
+
+// hh--posterize, s-hh--posterize, m-hh--posterize, l-hh--posterize
+@include device-class(#{$headings-class}--posterize) {
+    color: $brand-color-white;
+}
+
+// isSelected behaviour
+.isSelected .#{$headings-class} {
+    color: $action-item-font-color--selected;
+}
+// isSelected posterize behaviour
+.isSelected .#{$headings-class}--posterize {
+    @include transition(none);
+    color: $brand-color-white;
+}
+
+// isActive behaviour
+.isActive .#{$headings-class} {
+    @include transition(none);
+    color: $action-item-font-color--active;
+}
+// isActive posterize behaviour
+.isActive .#{$headings-class}--posterize {
+    @include transition(none);
+    color: $brand-color-white;
+}
+
+// isDisabled behaviour
+.isDisabled .#{$headings-class} {
+    @include transition(none);
+    color: $action-item-font-color--active;
+}

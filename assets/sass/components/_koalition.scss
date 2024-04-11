@@ -1,0 +1,279 @@
+$k-box-edge-map: ( 's' 80px, 'm' 120px );
+$k-line-thickness-map: ( 's' 2px, 'm' 2px );
+$k-n-size-map: ('s' 8px, 'm' 12px);
+
+$k-box-background: #ffffff;
+$k-line-background-off: rgba(#999999,0.1);
+
+$k-colormode-toggle-size-map: ('s' 30px, 'm' 30px);
+
+@mixin k-size($wmap, $hmap, $hmul : 1) {
+    @include device-dependent('width', $wmap);
+    @include device-dependent('height', $hmap, 0, $hmul);
+}
+
+@mixin k-segment-on($i, $body, $shadow) {
+    .k-segment-on-#{$i} {
+        z-index: 1;
+        background: $body;
+        @include box-shadow(0 0 10px $shadow);
+    }
+}
+
+.k-box {
+    @include position(relative);
+    @include k-size($k-box-edge-map, $k-box-edge-map);
+
+    display: inline-block;
+    overflow: hidden;
+    background: $k-box-background;
+
+    &.k-show-n .k-nn {
+        display: block;
+    }
+}
+
+.k-segment {
+    @include position(absolute);
+    @include box-sizing(border-box);
+    @include transform-origin(left top);
+    @include transition(all .8s ease);
+    background: $k-line-background-off;
+    z-index: 0;
+
+    .k-nn {
+        @include position(relative);
+        @include size(100% 100%);
+        display:none;
+    }
+    .k-n {
+        @include position(absolute);
+        @include k-size($k-n-size-map, $k-n-size-map);
+        @include device-dependent('line-height', $k-n-size-map);
+        @include device-dependent('font-size', $k-n-size-map, 0, 0.8);
+        text-align: center;
+        background: #cccccc;
+        color: #000000;
+    }
+}
+
+@include k-segment-on(1, #2980b9, #3498db);
+@include k-segment-on(2, #d35400, #e67e22);
+@include k-segment-on(3, #16a085, #1abc9c);
+@include k-segment-on(4, #8e44ad, #9b59b6);
+@include k-segment-on(5, #f39c12, #f1c40f);
+@include k-segment-on(6, #c0392b, #e74c3c);
+@include k-segment-on(7, #7f8c8d, #95a5a6);
+@include k-segment-on(8, #E08283, #E26E67);
+@include k-segment-on(9, #9E8E5A, #2CC990);
+
+.k-segment:nth-child(1) {
+    @include k-size(50%, $k-line-thickness-map);
+    .k-n {
+        left: 50%;
+    }
+}
+
+.k-segment:nth-child(2) {
+    @include k-size(50%, $k-line-thickness-map);
+    left: 50%;
+    .k-n {
+        left: 50%;
+    }
+}
+
+.k-segment:nth-child(3) {
+    @include k-size($k-line-thickness-map, 50%);
+    .k-n {
+        top: 50%;
+    }
+}
+
+.k-segment:nth-child(4) {
+    @include k-size($k-line-thickness-map, 50%, 1.4142);
+    @include device-dependent('top', $k-line-thickness-map, 0, 0.5);
+    @include transform(rotateZ(-45deg));
+    .k-n {
+        @include transform(rotateZ(45deg));
+        top: 50%;
+    }
+}
+
+.k-segment:nth-child(5) {
+    @include k-size($k-line-thickness-map, 50%);
+    left: 50%;
+    .k-n {
+        top: 50%;
+    }
+}
+
+.k-segment:nth-child(6) {
+    @include k-size($k-line-thickness-map, 50%, 1.4142);
+    @include transform(rotateZ(45deg));
+    left: 100%;
+    .k-n {
+        @include transform(rotateZ(-45deg));
+        top: 50%;
+    }
+}
+
+.k-segment:nth-child(7) {
+    @include k-size($k-line-thickness-map, 50%);
+    @include device-dependent('margin-left', $k-line-thickness-map, 0, -1);
+    left: 100%;
+    .k-n {
+        @include device-dependent('left', $k-line-thickness-map, 0, -3);
+        top: 50%;
+    }
+}
+
+.k-segment:nth-child(8) {
+    @include k-size(50%, $k-line-thickness-map);
+    top: 50%;
+    .k-n {
+        left: 50%;
+    }
+}
+
+.k-segment:nth-child(9) {
+    @include k-size(50%, $k-line-thickness-map);
+    top: 50%;
+    left: 50%;
+    .k-n {
+        left: 50%;
+    }
+}
+
+.k-segment:nth-child(10) {
+    @include k-size($k-line-thickness-map, 50%);
+    top: 50%;
+    .k-n {
+        top: 50%;
+    }
+}
+
+.k-segment:nth-child(11) {
+    @include k-size($k-line-thickness-map, 50%, 1.37);
+    @include transform(rotateZ(45deg));
+    top: 50%;
+    left: 50%;
+    .k-n {
+        @include transform(rotateZ(-45deg));
+        top: 50%;
+    }
+}
+
+.k-segment:nth-child(12) {
+    @include k-size($k-line-thickness-map, 50%);
+    top: 50%;
+    left: 50%;
+    .k-n {
+        top: 50%;
+    }
+}
+
+.k-segment:nth-child(13) {
+    @include k-size($k-line-thickness-map, 50%, 1.4142);
+    @include transform(rotateZ(-45deg));
+    top: 50%;
+    left: 50%;
+    @include device-dependent('margin-left', $k-line-thickness-map, 0, -0.5);
+    .k-n {
+        @include transform(rotateZ(45deg));
+        top: 50%;
+    }
+}
+
+.k-segment:nth-child(14) {
+    @include k-size($k-line-thickness-map, 50%);
+    @include device-dependent('margin-left', $k-line-thickness-map, 0, -1);
+    top: 50%;
+    left: 100%;
+    .k-n {
+        @include device-dependent('left', $k-line-thickness-map, 0, -3);
+        top: 50%;
+    }
+}
+
+.k-segment:nth-child(15) {
+    @include k-size(50%, $k-line-thickness-map);
+    @include device-dependent('top', $k-box-edge-map);
+    @include device-dependent('margin-top', $k-line-thickness-map, 0, -1);
+    .k-n {
+        @include device-dependent('top', $k-line-thickness-map, 0, -3);
+        left: 50%;
+    }
+}
+
+.k-segment:nth-child(16) {
+    @include k-size(50%, $k-line-thickness-map);
+    @include device-dependent('top', $k-box-edge-map);
+    @include device-dependent('margin-top', $k-line-thickness-map, 0, -1);
+    left: 50%;
+    .k-n {
+        @include device-dependent('top', $k-line-thickness-map, 0, -3);
+        left: 50%;
+    }
+}
+
+.k-colormode-toggle {
+    @include device-dependent('width', $k-colormode-toggle-size-map);
+    @include device-dependent('height', $k-colormode-toggle-size-map);
+    //@include box-shadow(0 0 10px #aaaaaa);
+    @include transition(all .25s ease);
+    border-radius: 50%;
+    margin: auto;
+    background : lighten(#7f8c8d, 30%);
+    color: #7f8c8d;
+    &.mode-0 {
+        &:before {
+            color: #16a085;
+        }
+    }
+    &.mode-1 {
+        &:before {
+            color: #c0392b;
+        }
+    }
+    &.mode-2 {
+        &:before {
+            color: #2980b9;
+        }
+    }
+    &.isActive, &.isSelected {
+    }
+
+    &:before {
+        font-family: "FontAwesome";
+        content: "\f004";
+        @include device-dependent('line-height', $k-colormode-toggle-size-map);
+    }
+}
+
+.k-contact {
+    padding: 20px;
+    padding-top: 40px;
+    a {
+        font-family: $monospace;
+        font-size: 1em;
+        font-weight: 300;
+        color: lighten(#7f8c8d, 20%);
+        text-decoration: none;
+    }
+}
+
+.form-factor-phone .k-ff-phone-hide-landscape {
+    @media screen and (orientation: landscape) {
+        display: none;
+    }
+}
+
+.form {
+
+}
+
+.shadow {
+    -webkit-filter: drop-shadow( -5px -5px 5px #f00 );
+            filter: drop-shadow( -5px -5px 5px #f00 ); /* Same syntax as box-shadow */
+}
+

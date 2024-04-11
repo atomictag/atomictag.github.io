@@ -1,0 +1,9 @@
+
+.errors-container {
+    height:100%;
+}
+
+.errors-body {
+    @include mooze-vertical-align-wrapper();
+    color: inherit;
+}

@@ -1,0 +1,45 @@
+/* =======================
+ * SIDEBAR
+ * ======================= */
+
+$sidebar-width-extent: 256px !default; // 1024 - 768 = 320 * 0.8 = 256
+// Make the whole layer full-screen on phones to optimize the login transition
+// On tablets the layer is as wide as the width extent.
+$sidebar-layer-width-map: (
+    's' 100%,
+    'm' $sidebar-width-extent
+)!default;
+// The width of the cornercard logo
+$sidebar-logo-width: 122px;
+
+.mooze-window__layer--sidebar {
+    background-color: $sidebar-layer-background-color;
+    @include device-dependent('width', $sidebar-layer-width-map);
+    @if $sidebar-layer-background-color != $sidebar-list-background-color {
+        height: 140%; // > 100% => sidebar scale transition does not produce a bottom margin (looks nicer)
+    }
+}
+
+.mooze-view--sidebar {
+
+}
+
+.mooze-header--sidebar {
+    background-color: $sidebar-header-background-color;
+}
+
+.mooze-header__logo--sidebar {
+    @include size($sidebar-logo-width 100%);
+    @include position(absolute, 0px 0 0 15px );
+    //background-image: url('/placeholder/244x28');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    color: #283498;
+}
+
+.mooze-body--sidebar {
+    @include size(100%);
+    background-color: $sidebar-body-background-color;
+}
+

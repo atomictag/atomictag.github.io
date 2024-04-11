@@ -1,0 +1,46 @@
+$fill-height : 100%!default;
+
+.fill-height {
+    position: relative;
+    height: $fill-height;
+    @include box-sizing(border-box);
+}
+
+.fill-height__1of4 {
+    position: relative;
+    height: $fill-height / 4;
+    // Set an arbitrary 'smallest' size (3 full rows on an iPhone)
+    min-height: 85px;
+}
+
+.fill-height__2of4 {
+    position: relative;
+    height: $fill-height / 2;
+    // Set an arbitrary 'smallest' size (6 full rows on an iPhone)
+    min-height: 170px;
+}
+
+.fill-height__3of4 {
+    position: relative;
+    height: $fill-height / 4 * 3;
+    // Set an arbitrary 'smallest' size (9 full rows on an iPhone)
+    min-height: 255px;
+}
+
+.fill-height__stretched-to-margin {
+    display: block;
+    height: auto;
+    @include position(absolute, 0px 0px 0px 0px);
+}
+
+/*
+    // Funny CSS trickery at play from: http://stackoverflow.com/questions/8720931/can-css-detect-the-number-of-children-an-element-has;
+    .fill-height-row {
+
+    }
+    // four items
+    .fill-height-row:first-child:nth-last-child(4),
+    .fill-height-row:first-child:nth-last-child(4) ~ .fill-height-row {
+        height: 25%;
+    }
+*/

@@ -1,0 +1,25 @@
+
+// Font weights
+$font-weight-light:     300;
+$font-weight-regular:   400;
+$font-weight-semibold:  600;
+$font-weight-bold:      700;
+$font-weight-extrabold: 800;
+
+// Font Awesome
+@import "font_awesome";
+
+// Fontello
+@import "fontello";
+
+// Open Sans
+@import "open_sans";
+
+// Custom fonts here...
+
+/* ====== Font defaults ====== */
+
+body {
+    font-family: 'Open Sans', $helvetica !important;
+    font-weight: $font-weight-regular;
+}

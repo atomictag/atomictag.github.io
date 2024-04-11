@@ -1,0 +1,34 @@
+$panel-border-radius: 5px;
+
+.panel {
+    @include box-sizing(border-box);
+    @include border-top-radius($panel-border-radius);
+    @include border-bottom-radius($panel-border-radius);
+    background-color: $brand-color-white;
+    box-shadow: 0 0 10px $shadow-color;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.panel.panel--dialog {
+    min-width:220px;
+}
+
+.panel.panel--no-shadow {
+    box-shadow: none;
+}
+
+.panel.panel--no-rounding {
+    @include border-top-radius(0);
+    @include border-bottom-radius(0);
+}
+
+.panel.panel--no-rounding-top {
+    @include border-top-radius(0);
+}
+
+.panel.panel--no-rounding-bottom {
+    @include border-bottom-radius(0);
+}

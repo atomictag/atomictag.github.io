@@ -1,0 +1,281 @@
+
+$breadcrumb-slot-width-map:
+(
+  's' 0px,
+  'm' 50px, // should be even
+  'l' 50px
+)!default;
+
+$breadcrumb-line-color: #bbbbbb;
+$breadcrumb-line-thickness: 1px;
+
+$breadcrumb-badge-diameter-map:
+(
+  's' 0px,
+  'm' 16px, // should be even
+  'l' 16px
+)!default;
+$breadcrumb-badge-voffset-map:
+(
+  's' 5px,
+  'm' 20px,
+  'l' 20px
+)!default;
+
+$breadcrumb-badge-color: $breadcrumb-line-color;
+$breadcrumb-badge-color--separator: #99cc00;
+$breadcrumb-badge-text-color: #fdfdfd;
+$breadcrumb-disclosure-color: $brand-color-white;
+
+.threaded-list {
+
+}
+
+// The group item wrapper. Some of its children need to be absolutely positioned, so we make its position relative.
+.threaded-list-item {
+    @include position(relative);
+    @include transform-origin(left top);
+    overflow: hidden;
+}
+
+// Marker for separator items
+.threaded-list-item--separator {
+
+}
+
+// Marker for collapsible items
+.threaded-list-item--collapsible {
+
+}
+
+// Collapsible items when in "modal" edit mode
+.threaded-list-item--collapsible.disableEditing {
+  &:after {
+    @include position(absolute, 0px 0 0 0px);
+    @include device-dependent('left', $breadcrumb-slot-width-map);
+    @include size(100% 100%);
+    content: "";
+    background: rgba(#D6DDE5, .5);
+    z-index: 100;
+  }
+  // Hide triangle
+  .threaded-list-item__breadcrumb:after {
+    display: none;
+  }
+}
+
+// The breadcrumb wrapper. Absolutely positioned within its parent and fill-size. Hidden on 's' devices.
+.threaded-list-item__breadcrumb {
+    // Hide on small devices
+    @include device-dependent('display', ('s' none, 'm' block));
+
+    // Sizing
+    @include position(absolute, 0px 0 0 0px);
+    @include device-dependent('width', $breadcrumb-slot-width-map);
+    height: 100%;
+
+}
+
+// The breadcrumb line. Basically just a border slapped in the middle of its parent.
+.threaded-list-item__breadcrumb:before {
+    content:"";
+    @include position(absolute);
+    // Position the line in the middle of the slot. Adjust the 3rd (add) and 4th (multiply) args if the line is thicker than 1px
+    @include device-dependent('left', $breadcrumb-slot-width-map, 0, .5);
+    border-left: $breadcrumb-line-thickness solid $breadcrumb-line-color;
+    // Full-height is the default. Below we'll add a rule to make it shorter when applied to the last collapsible item
+    height: 100%;
+}
+
+// The triangle, apparently sticking out of the content panel but really attached
+// to the breadcrumb slot. This is supported only on collapsible items and not separators.
+.threaded-list-item--collapsible .threaded-list-item__breadcrumb:after {
+    content: "";
+    float: right;
+    // Position the top edge of the triangle so that it stays be aligned with the circle
+    @include position(relative);
+    @include device-dependent('top', $breadcrumb-badge-voffset-map);
+    // Make triangle
+    @include size(0px 0px);
+    border-color: transparent;
+    border-style: solid;
+    @include device-dependent('border-width', $breadcrumb-badge-diameter-map, 0, .5);
+    border-right-color: $breadcrumb-disclosure-color;
+    // Under the circle
+    z-index: 1;
+}
+
+// The circle. This is positioned absolutely inside its container, exactly on top of the line,
+// width an arbitrary vertical offset from the top.
+.breadcrumb-badge {
+    @include position(absolute);
+    // Position the top edge of the circle
+    @include device-dependent('top', $breadcrumb-badge-voffset-map);
+    // Position the circle with its center on top of the line. To do this,
+    // offset the x position by half the size of the diameter using a negative margin
+    @include device-dependent('left', $breadcrumb-slot-width-map, 0, .5);
+    @include device-dependent('margin-left', $breadcrumb-badge-diameter-map, 0, -0.5);
+
+    // Set width and height
+    @include device-dependent('width', $breadcrumb-badge-diameter-map);
+    @include device-dependent('height', $breadcrumb-badge-diameter-map);
+    @include border-top-radius(50%);
+    @include border-bottom-radius(50%);
+    @include box-sizing(border-box);
+    background: $breadcrumb-badge-color;
+    // Above the disclosure
+    z-index: 2;
+}
+
+
+// If there's a breadcrumb applied to a one-line separator, it has no vertical offset
+.threaded-list-item--separator .breadcrumb-badge {
+   top: 0px;
+   background: $breadcrumb-badge-color--separator;
+}
+
+// The text inside the breadcrumb circle. Its size is proportional (60%) to the size of the circle that contains it
+.breadcrumb-badge__text {
+    // Make the text 60% of the diameter of the circle and set line height to fill the diameter (so it gets centered)
+    @include device-dependent('font-size', $breadcrumb-badge-diameter-map, 0, .6);
+    @include device-dependent('line-height', $breadcrumb-badge-diameter-map);
+    color: $breadcrumb-badge-text-color;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+}
+
+// The content wrapper. Just a div shifted to the right (when needed). Note that the position is NOT relative.
+.threaded-list-item__content {
+    @include device-dependent('margin-left', $breadcrumb-slot-width-map);
+    z-index: 0;
+}
+
+// The vertical line of the last item goes only until the circle
+.threaded-list-item:last-of-type {
+    .threaded-list-item__breadcrumb:before {
+      @include device-dependent('height', $breadcrumb-badge-voffset-map);
+    }
+}
+
+// The vertical line starts from the circle instead of the top IF the first item is collapsible (i.e. not a separator)
+.threaded-list-item.threaded-list-item--collapsible:first-of-type {
+  .threaded-list-item__breadcrumb:before {
+      @include device-dependent('top', $breadcrumb-badge-voffset-map);
+  }
+}
+
+// To indent collapsible items by, say, 10 pixels
+// .threaded-list-item.threaded-list-item--collapsible:not(.collapsed) {
+//     .threaded-list-item__content {
+//         @include device-dependent('margin-left', $breadcrumb-slot-width-map, 10);
+//     }
+//     .threaded-list-item__breadcrumb:after {
+//         margin-right: -10px;
+//     }
+// }
+
+// ***** TRANSITIONS ****** //
+
+// Only collapsible items...
+.threaded-list-item.threaded-list-item--collapsible {
+    .threaded-list-item__contentBodyCollapsed {
+      @include transition(transform .25s ease .3s);
+      @include position(absolute, 0px 0 0 0);
+      @include transform(scale(1,0));
+      @include device-dependent('height', $breadcrumb-badge-voffset-map, 15, 2);
+      background: transparent;
+      opacity: 0;
+    }
+    .threaded-list-item__contentBody, .panel, .threaded-list-item__breadcrumb:after {
+        @include transition(all .5s ease);
+        @include transform-origin(left top);
+    }
+    &.collapsed {
+       .threaded-list-item__contentBody {
+         opacity : 0;
+         @include device-dependent('height', $breadcrumb-badge-voffset-map, 0, 2);
+         @include transform(scale(1,0));
+       }
+       .panel {
+          background: lighten($breadcrumb-line-color, 20%);
+       }
+       .threaded-list-item__breadcrumb:after {
+          border-right-color: lighten($breadcrumb-line-color, 20%);
+       }
+       .threaded-list-item__contentBodyCollapsed {
+          @include transform(scale(1,1));
+          @include transform-origin(left bottom);
+          opacity: 1;
+       }
+    }
+}
+
+// ====================== SURVEY-SPECIFIC STUFF =======
+// Should be moved in its own file but it's kept here for easy moving around projects
+
+// BUTTONS
+.pure-button.isSelectedAnswer {
+  @extend .isActive;
+}
+
+.pure-button.button-submit {
+  color: white;
+  font-size:70%;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: rgb(28, 184, 65); /* this is a green */
+  .hh, .fa {
+    color: white;
+  }
+  &.isDisabled {
+    @extend .pure-button-disabled;
+  }
+}
+
+.pure-button.button-range {
+  color: white;
+  border-radius: 10px;
+  background: rgb(66, 184, 221); /* this is a light blue */
+  &.isActive {
+    @extend .pure-button-primary.isActive;
+  }
+}
+
+// RESULT BAR (probably better done with something like http://getbootstrap.com/components/#progress)
+
+%survey-result-bar {
+  @include border-top-radius(10px);
+  @include border-bottom-radius(10px);
+  @include box-sizing(border-box);
+  @include transition(width .5s ease);
+  background:transparent;
+  height: 100%;
+}
+
+.survey-result-bar-container {
+  @extend %survey-result-bar;
+  @include position(relative);
+  overflow: hidden;
+  height: 1em;
+  width: 100%;
+}
+
+.survey-result-bar-extent {
+  @extend %survey-result-bar;
+  @include position(absolute, 0px 0 0 0px);
+  opacity: .25;
+  border: 1px solid #666666;
+}
+
+.survey-result-bar-value {
+  @extend .survey-result-bar-extent;
+  opacity: 1;
+  border: 1px solid #aaaaaa;
+}
+
+.survey-result-bar-border {
+  @extend .survey-result-bar-extent;
+  box-shadow: 0 0 10px $shadow-color;
+  opacity: 1;
+}

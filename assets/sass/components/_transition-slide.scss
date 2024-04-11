@@ -1,0 +1,36 @@
+/*
+    <div class="transition-slide-container">
+        <div class="transition-slide-wrapper">
+            <div class="transition-slide-prev"></div>
+            <div class="transition-slide-next"></div>
+        </div>
+    </div>
+ */
+
+.transition-slide-container {
+
+}
+
+.transition-slide-wrapper {
+    overflow: hidden;
+    @include position(relative);
+
+    &.slidenext {
+        .transition-slide-prev, .transition-slide-next {
+            @include transform(translateX(-100%));
+        }
+    }
+
+    .transition-slide-prev {
+        @include transition(all 0.4s ease);
+        @include position(absolute, 0px 0 0 0px);
+        @include size(100%);
+    }
+
+    .transition-slide-next {
+        @include transition(all 0.4s ease);
+        @include position(absolute, 0px 0 0 100%);
+        @include size(100%);
+    }
+
+}

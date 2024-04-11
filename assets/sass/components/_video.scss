@@ -1,0 +1,30 @@
+
+.demo-video-container {
+    background-color: $brand-color-grey-lighter;
+}
+
+.demo-video {
+   width:100%;
+   height: auto;
+   background-size:100%;
+   background-position: top top;
+   background-repeat: no-repeat;
+}
+
+// Video is initially hidden on iOS to cope with a flickering browser bug
+.ios .demo-video {
+    display: none;
+}
+
+// On iPhone and iPad we fix the height according to the image aspect ratio
+// as there is no way to get the poster to cover the whole video area
+.form-factor-phone, .iphone {
+    .demo-video-container, .demo-video {
+        height: 200px;
+    }
+}
+.form-factor-tablet, .ipad {
+    .demo-video-container, .demo-video {
+        height: 250px;
+    }
+}
